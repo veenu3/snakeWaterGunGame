@@ -1,6 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+int snakeWaterGun(char you, char comp ){
+    if (comp == 's') {
+            if (you == 'w') {
+                return -1;
+            }
+            else if(you == 'g') {
+                return  1;
+            }
+        }
+        else if(comp == 'w') {
+            if (you == 'g') {
+                return -1;
+            }
+            else if (you == 's') {
+                return 1;
+            }
+        }
+        else if(comp == 'g') {
+            if (you== 's') {
+                return -1;
+            }
+            else if (you == 'w') {
+                return 1;
+            }
+        }
+ }
 int main(){
     char you, comp,ch;;
     int n,round,globalcompscore=0,globaluserscore=0;
@@ -30,49 +56,26 @@ int main(){
           printf("Invalid input, try again\n");
             continue;
         }
-        if (comp == 's') {
-            if (you == 'w') {
-                comp_win = 1;
-            }
-            else if(you == 'g') {
-                user_win = 1;
-            }
-        }
-        else if(comp == 'w') {
-            if (you == 'g') {
-                comp_win = 1;
-            }
-            else if (you == 's') {
-                user_win = 1;
-            }
-        }
-        else if(comp == 'g') {
-            if (you== 's') {
-                comp_win = 1;
-            }
-            else if (you == 'w') {
-                user_win = 1;
-            }
-        }
-        if (user_win > comp_win){
+        int result = snakeWaterGun(you, comp);
+        if (result == 1){
             printf("You Won round %d \n",round);
          }
-        else if (comp_win > user_win){
+        else if (result == -1){
             printf("Computer Won round %d \n",round);
          }
         else{
             printf("Draw!!\n");
         }
         printf("You chose %c and computer chose %c.\n ", you,comp);
-        globalcompscore+=comp_win;
-        globaluserscore+=user_win;
+        globalcompscore+=result== -1;
+        globaluserscore+=result == 1;
         round += 1;
     }
 if (globaluserscore > globalcompscore){
     printf("\nCongratulations!! You Won");
     }
 else if (globalcompscore > globaluserscore){
-    printf("\nYou lose!!");
+   printf("\nYou lose!!");
     }
 else{
     printf("\nMatch Draw!!");
